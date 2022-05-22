@@ -1,0 +1,24 @@
+{# {% import "macros/components.njk" as components %} #}
+{% import "data/global.data.njk" as global %}
+
+<!DOCTYPE html>
+<html lang="en" style="font-size:16px">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  {# Safari specfic to disable phone number link replacment #}
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="stylesheet" href="/assets/styles.css?v={{ global.cacheVersion }}">
+  {% block headCode %}{% endblock %}
+</head>
+<body>
+  <div class="Outer_container">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block footerCodeBefore %}{% endblock %}
+  {% block footerCode %}{% endblock %}
+</body>
+</html>

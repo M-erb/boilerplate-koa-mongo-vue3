@@ -1,0 +1,20 @@
+{% extends "layouts/main-layout.njk" %}
+
+{% block headCode %}{% endblock %}
+
+{% block content %}
+  <main>
+    <h1>{{ title }}</h1>
+    <p>{{ message }}</p>
+
+    {% if link.url %}
+      <p><a href="{{ link.url }}">{{ link.label }}</a></p>
+    {% endif %}
+  </main>
+{% endblock %}
+
+{% block footerCodeBefore %}{% endblock %}
+
+{% block footerCode %}
+  <script src="/assets/main.js?v={{ global.cacheVersion }}"></script>
+{% endblock %}

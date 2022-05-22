@@ -1,0 +1,13 @@
+{% extends "layouts/app-layout.njk" %}
+
+{% block headCode %}{% endblock %}
+
+{% block content %}
+  <div id="app"></div>
+{% endblock %}
+
+{% block footerCodeBefore %}{% endblock %}
+
+{% block footerCode %}
+  <script type="module" src="/app-assets/main.js?v={{ global.cacheVersion }}"></script>
+{% endblock %}
