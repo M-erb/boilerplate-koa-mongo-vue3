@@ -51,10 +51,8 @@ router.post('/users',
       if (isDup) {
         const dupKey = Object.keys(error.keyValue)[0] ?? ''
         const payload = {
-          isDup,
-          message: 'is duplicate',
-          keyValue: error.keyValue,
-          dupKey
+          key: dupKey,
+          message: `${dupKey} is already taken`
         }
 
         ctx.status = 400
@@ -92,7 +90,7 @@ router.post('/users/authorize',
         const user = await User.sanitizeOutPut(foundUser, foundUser)
 
         ctx.body = {
-          token: token,
+          token,
           user
         }
       } else {
