@@ -32,7 +32,7 @@ const config = {
   server: {
     host: 'localhost',
     port: env.int('PORT', 3030),
-    public: path.join(__dirname, '../public/'),
+    public: path.join(__dirname, '../../public'),
     trustProxy: true,
     logger: true
   },
