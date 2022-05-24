@@ -1,0 +1,122 @@
+/* keyframs */
+@keyframes blink{
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+.blink {
+  animation-name: blink;
+}
+
+@keyframes fadeIn{
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+@keyframes fadInUpShort {
+  from {
+    transform: translate(0, 30px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+.fadInUpShort {
+  animation-name: fadInUpShort;
+}
+
+@keyframes fadInDownShort {
+  from {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.fadeInDownShort {
+  animation-name: fadInDownShort;
+}
+
+@keyframes DropInDownFull {
+  from {
+    transform: translate3d(0, -120%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.dropInDownFull {
+  animation-name: DropInDownFull;
+}
+
+@keyframes loadingSpin {
+  0% {
+
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate {
+  /* animation-fill-mode: both; */
+  animation-duration: .3s;
+}
+
+/* vue transitions */
+.slowfade-enter-active, .slowfade-leave-active {
+  transition: opacity .5s;
+  transition-delay: 0;
+}
+.slowfade-enter, .slowfade-leave-to {
+  opacity: 0
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .1s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+.noty_effects_open {
+  opacity: 0;
+  transform: translate(50%);
+  animation: noty_anim_in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.noty_effects_close {
+  animation: noty_anim_out 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes noty_anim_in {
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes noty_anim_out {
+  100% {
+    transform: translate(50%);
+    opacity: 0;
+  }
+}
