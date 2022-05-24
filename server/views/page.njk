@@ -4,12 +4,21 @@
 
 {% block content %}
   <main>
-    <h1>{{ title }}</h1>
-    <p>{{ message }}</p>
-
-    {% if link.url %}
-      <p><a href="{{ link.url }}">{{ link.label }}</a></p>
+    {% if title %}
+      <h1>{{ title }}</h1>
     {% endif %}
+
+    {% if message %}
+      <p>{{ message }}</p>
+    {% endif %}
+
+    {% if menu.length %}<ul>{% endif %}
+      {% for link in menu %}
+        {% if link.url %}
+          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+        {% endif %}
+      {% endfor %}
+    {% if menu.length %}</ul>{% endif %}
   </main>
 {% endblock %}
 

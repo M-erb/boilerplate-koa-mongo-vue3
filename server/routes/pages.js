@@ -11,10 +11,16 @@ router.get('/', async (ctx, next) => {
   const content = {
     title: 'You found the home page',
     message: 'This could be the best home page ever! Fight me!',
-    link: {
-      label: 'About',
-      url: '/about'
-    }
+    menu: [
+      {
+        label: 'About',
+        url: '/about'
+      },
+      {
+        label: 'App',
+        url: '/app'
+      }
+    ]
   }
 
   await ctx.render('page', content)
@@ -24,10 +30,16 @@ router.get('/about', async (ctx, next) => {
   const content = {
     title: 'About page',
     message: 'Are you not entertained!??!!',
-    link: {
-      label: 'Home',
-      url: '/'
-    }
+    menu: [
+      {
+        label: 'Home',
+        url: '/'
+      },
+      {
+        label: 'App',
+        url: '/app'
+      }
+    ]
   }
 
   await ctx.render('page', content)
@@ -37,14 +49,22 @@ router.get('/:splat*', async (ctx, next) => {
   const content = {
     title: '404',
     message: 'Well... we could not find that, try again.',
-    link: {
-      label: 'Home',
-      url: '/'
-    }
+    menu: [
+      {
+        label: 'Home',
+        url: '/'
+      },
+      {
+        label: 'App',
+        url: '/app'
+      }
+    ]
   }
 
   ctx.status = 404
-  await ctx.render('page', content)
+
+  if (ctx.accepts('html')) await ctx.render('page', content)
+  else if (ctx.accepts('json')) ctx.body = { message: 'well... we could not find that, try again.', status: 404 }
 })
 
 export default router
