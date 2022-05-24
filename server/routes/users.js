@@ -86,12 +86,17 @@ router.post('/users/authorize',
       const isMatched = await foundUser.comparePassword(password)
       if (isMatched) {
         // Generate and return jwt token
-        const token = jwt.sign({ id: foundUser.id }, config.auth.secret, config.auth.options)
-        const user = await User.sanitizeOutPut(foundUser, foundUser)
+        try {
+          const token = jwt.sign({ id: foundUser.id }, config.auth.secret, config.auth.options)
+          const user = await User.sanitizeOutPut(foundUser, foundUser)
 
-        ctx.body = {
-          token,
-          user
+          ctx.body = {
+            token,
+            user
+          }
+        } catch (error) {
+          console.error('Login error: ', error)
+          loginFailed('There was an issue with logging in', 500)
         }
       } else {
         loginFailed()
@@ -100,11 +105,11 @@ router.post('/users/authorize',
       loginFailed()
     }
 
-    function loginFailed () {
-      ctx.status = 401
+    function loginFailed (message = 'Username or password is incorrect', status = 401) {
+      ctx.status = status
       ctx.body = {
         status: ctx.status,
-        message: 'Username or password is incorrect'
+        message
       }
     }
   }
