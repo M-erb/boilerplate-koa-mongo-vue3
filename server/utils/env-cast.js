@@ -1,7 +1,9 @@
 const envs = process.env
 
-function env (key, defaultValue) {
-  return Object.prototype.hasOwnProperty.call(envs, key) ? envs[key] : defaultValue
+function env (key, defaultValue = undefined) {
+  if (!Object.prototype.hasOwnProperty.call(envs, key)) return defaultValue
+  const value = envs[key]
+  return value !== '' ? value : defaultValue
 }
 
 const utils = {
