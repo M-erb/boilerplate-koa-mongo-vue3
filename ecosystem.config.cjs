@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'recipebytes.com',
+    name: 'boilerplate',
     script: './server/server.js',
     error_file: './.logs/err.log',
     out_file: './.logs/out.log',
@@ -17,7 +17,6 @@ module.exports = {
       '.data',
       'node_modules',
       '.logs',
-      'build',
       '^[.]'
     ],
     max_memory_restart: '2G'
