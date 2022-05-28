@@ -64,7 +64,7 @@ npm start
 
 ## Env Casting Types
 
-A simple util is included to help use the values provided by the `.env` file. The src can be found in `server/utils/env-cast.js` AND allows passing a default value.
+A simple util is included to help use the values provided by the `.env` file. The src can be found in `server/utils/env-cast.js` AND allows passing a default value. Using [dotenv-cast](https://www.npmjs.com/package/dotenv-cast).
 
 ```javascript
 // string
@@ -107,3 +107,13 @@ SHIP=yourhostname:/path/to/site/
 ```
 
 *NOTE* Also if you have included any extra directories or files outside of the ones this repo starts with and you need them in your deployment then add them to the `BUILD_LIST` array env variable.
+
+2. Run command
+
+```bash
+npm run ship
+```
+
+It will ask you if you want to `build`, this will copy all of the nessesary files into a `.server-ready-build` directory. Almost always answer yes or `y` or just press `enter`.
+
+Then it will ask which `env` you want to ship to, `staging` or `production`. This will correspond to the `.env` variables above.
