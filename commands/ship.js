@@ -6,7 +6,7 @@ import chalk from 'chalk'
 import dotenv from 'dotenv'
 import inquirer from 'inquirer'
 import notifier from 'node-notifier'
-import env from './server/utils/env-cast.js'
+import env from 'dotenv-cast'
 import { execSync } from 'node:child_process'
 
 dotenv.config({ path: '.env' })

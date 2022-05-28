@@ -1,7 +1,7 @@
 import path from 'node:path'
 import chalk from 'chalk'
 import dotenv from 'dotenv'
-import env from './utils/env-cast.js'
+import env from 'dotenv-cast'
 import __dirname from './utils/dirname.js'
 import fse from 'fs-extra'
 

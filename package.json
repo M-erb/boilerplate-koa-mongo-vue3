@@ -29,6 +29,7 @@
     "chalk": "^5.0.1",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.1",
+    "dotenv-cast": "^0.1.0",
     "fs-extra": "^10.1.0",
     "inquirer": "^8.2.4",
     "joi": "^17.6.0",
