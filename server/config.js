@@ -20,7 +20,7 @@ const db = {
   host: env('DB_HOST', 'localhost'),
   user: env('DB_USER'),
   password: env('DB_PASSWORD'),
-  database: env('DB_NAME', 'recipebytes-db')
+  database: env('DB_NAME', 'our-db')
 }
 
 const dbAuth = db.user && db.password ? `${db.user}:${db.password}@` : ''
