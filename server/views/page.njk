@@ -3,22 +3,31 @@
 {% block headCode %}{% endblock %}
 
 {% block content %}
-  <main>
-    {% if title %}
-      <h1>{{ title }}</h1>
-    {% endif %}
+  <main class="page">
+    <div class="text_center">
+      {% if title %}
+        <h1>{{ title }}</h1>
+      {% endif %}
 
-    {% if message %}
-      <p>{{ message }}</p>
-    {% endif %}
+      {% if message %}
+        <p>{{ message }}</p>
+      {% endif %}
 
-    {% if menu.length %}<ul>{% endif %}
-      {% for link in menu %}
-        {% if link.url %}
-          <li><a href="{{ link.url }}">{{ link.label }}</a></li>
-        {% endif %}
-      {% endfor %}
-    {% if menu.length %}</ul>{% endif %}
+      <div class="theme_swticher">
+        <label for="">
+          <span id="themeswitcher_label">Dark Theme</span>
+          <input type="checkbox" name="themeswitcher" id="themeswitcher">
+        </label>
+      </div>
+
+      {% if menu.length %}<ul>{% endif %}
+        {% for link in menu %}
+          {% if link.url %}
+            <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% if menu.length %}</ul>{% endif %}
+    </div>
   </main>
 {% endblock %}
 

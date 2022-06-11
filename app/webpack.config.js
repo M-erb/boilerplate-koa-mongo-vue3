@@ -1,6 +1,7 @@
 const path = require('path')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
 
 module.exports = (env, argv) => {
@@ -8,13 +9,13 @@ module.exports = (env, argv) => {
   console.log('webpack ENV: ', ENV)
 
   const config = {
-    name: 'client-config',
+    name: 'app-config',
     entry: {
       main: './src/main.js'
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, '../public/assets')
+      path: path.resolve(__dirname, '../public/app-assets')
     },
     mode: ENV,
     watch: false,
@@ -23,7 +24,7 @@ module.exports = (env, argv) => {
         '~': path.resolve(__dirname, './src/')
       },
       modules: ['node_modules'],
-      extensions: ['.js', '.json']
+      extensions: ['.js', '.json', '.vue']
     },
     devtool: 'inline-source-map',
     module: {
@@ -42,6 +43,10 @@ module.exports = (env, argv) => {
           options: {
             target: 'es2015'
           }
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader'
         },
         {
           test: /\.(png|svg|jpg|gif|ico)$/,
@@ -89,6 +94,7 @@ module.exports = (env, argv) => {
       removeEmptyChunks: true
     },
     plugins: [
+      new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: 'styles.css'
       }),
@@ -96,6 +102,8 @@ module.exports = (env, argv) => {
         NODE_ENV: ENV
       }),
       new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: true,
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       })
     ]

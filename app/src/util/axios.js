@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import { localDb, eventBus } from '~/main.js'
 const isDevEnv = process.env.NODE_ENV === 'development'
 
 Axios.interceptors.response.use(res => {
@@ -17,7 +18,15 @@ Axios.interceptors.response.use(res => {
   }
 
   if (error?.status === 401) {
-    console.log('Example, there is a 401 error...', error)
+    if (error?.data?.message === 'jwt expired') {
+      if (isDevEnv) console.log('JWT is expired, needs to log back in')
+      eventBus.emit('needToLogBackIn')
+    }
+
+    if (error?.data?.message === 'Missing Authorization') {
+      if (isDevEnv) console.log('Missing token')
+      eventBus.emit('needToLogBackIn')
+    }
   }
 
   return Promise.reject(error)
@@ -45,6 +54,33 @@ function processError (err) {
 
     return err
   }
+}
+
+export async function addAuth (token) {
+  Axios.defaults.headers.common.Authorization = `Bearer ${token}`
+  return true
+}
+
+export async function clearAuth (isLogout = false, status = 'error') {
+  await localDb.set({ token: '' })
+  Axios.defaults.headers.common.Authorization = ''
+  if (isLogout) {
+    localDb.set({
+      authStatus: 'out',
+      token: '',
+      user: null
+    })
+  } else {
+    eventBus.emit('needToLogBackIn')
+
+    localDb.set({
+      authStatus: status,
+      token: '',
+      user: null
+    })
+  }
+
+  return true
 }
 
 export const axios = Axios

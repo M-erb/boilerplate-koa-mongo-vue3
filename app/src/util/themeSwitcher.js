@@ -2,7 +2,9 @@ const theme = {
   get is () {
     const savedName = localStorage.getItem('appTheme') || false
     if (savedName) return savedName
-    else return this.switchTheme('light')
+    else {
+      return this.switchTheme('light')
+    }
   },
   set is (name) {
     return this.switchTheme(name)

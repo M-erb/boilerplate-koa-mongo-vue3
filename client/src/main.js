@@ -1,31 +1,23 @@
-import { createApp } from 'vue'
-import router from '~/router.js'
-import Root from '~/root.vue'
 import '~/styles/main.pcss'
-import { LocalDb } from '~/util/localDb'
-import nanobus from 'nanobus'
 import themeSwitcher from './util/themeSwitcher'
-
-export const localDb = LocalDb('app', 'v1')
-export const eventBus = nanobus()
-
-eventBus.on('*', (eventName, data, perfTimingId) => {
-  console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
-  console.log(`EventBus - ${eventName}`)
-  console.log(`EventBus - ${eventName} data:`, data)
-  console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
-})
-
-const app = createApp(Root)
-
-// Enable dev tools
-window.postMessage({
-  devtoolsEnabled: true,
-  vueDetected: true
-}, '*')
-
-app.use(router)
-app.mount('#app')
 
 themeSwitcher.init()
 export const theme = themeSwitcher
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Detect Visitor's prefered theme mode
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme.is = 'dark'
+  }
+
+  const themeswitchControl = document.querySelector('#themeswitcher') ?? false
+  if (themeswitchControl) {
+    const currentTheme = theme.is
+    if (currentTheme === 'dark') themeswitchControl.checked = true
+
+    themeswitchControl.addEventListener('change', () => {
+      if (themeswitchControl.checked) theme.is = 'dark'
+      else theme.is = 'light'
+    })
+  }
+})
