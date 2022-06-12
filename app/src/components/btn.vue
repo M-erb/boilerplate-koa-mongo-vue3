@@ -90,7 +90,6 @@ export default {
     &.size_sm {
       min-width: auto;
       font-size: var(--scale-1);
-      margin: 0;
       padding: var(--size-2);
 
       & > span {
